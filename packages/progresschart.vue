@@ -1,5 +1,5 @@
 <template>
-    <div ref="mountNode" class="mount-node" style="position: relative;" @click="canvasHandle($event)"/>
+    <div ref="mountNode" class="mount-node" style="position: relative;-webkit-tap-highlight-color: rgba(0, 0, 0, 0);" @click="canvasHandle($event)"/>
 </template>
 <script>
     export default {
@@ -385,7 +385,7 @@
                 if (!this.startTime) { this.startTime = timestamp }
                 const progressTime = timestamp - this.startTime
                 // 增加  --- 减少 
-                let pieVlaue = this.pieVlaue = this.pieVelocityCurve(progressTime, 0, this.pieDeviation, 1000)
+                let pieVlaue = this.pieVlaue = this.pieVelocityCurve(progressTime, 0, this.pieDeviation, 800)
                 // 结束条件
                 if (pieVlaue <= this.pieDeviation) {
                     this.circleTime = requestAnimationFrame(this.pieFrame)
