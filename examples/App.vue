@@ -11,7 +11,7 @@
       :fontSize=28
       :arcEndeg=80
       defaultBg="#ccc"
-      :bg-img="require('./assets/logo.png')"
+      :bg-img="require('./assets/logo.jpg')"
       html='<p style="pading:0;margin:0;color:#000;font-size:35px">霸霸</p>'
       :position= "['50%', '90%']"
     />

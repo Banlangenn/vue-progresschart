@@ -127,9 +127,10 @@
                 ctx.clearRect(0, 0, this.centrality.x * 2, this.centrality.y * 2)
                 ctx.lineWidth = this.lineWidth
                 ctx.lineCap = this.lineCap
-                const oneAngle = Math.PI / 180 // 一度
-                const startEndge =  oneAngle * this.rotate
-                const endEndge = oneAngle * (360 - this.arcEndeg)
+                const oneAngle = Math.PI / 180, // 一度
+                startEndge =  oneAngle * this.rotate,
+                endEndge = oneAngle * (360 - this.arcEndeg)
+                // --------------
                 if(this.defaultBg) {
                     ctx.beginPath()
                     ctx.arc(cx, cy, r, startEndge, startEndge + endEndge)
@@ -140,12 +141,10 @@
                 ctx.arc(cx, cy, r, startEndge, startEndge + process / 100 * endEndge)
                 // 就是  其实点  180     +  300度  --- 减少的 60 度 就是那个 空白
                 if (img) {
-                    ctx.strokeStyle = ctx.createPattern(img, 'repeat')
+                    ctx.strokeStyle = ctx.createPattern(img, 'no-repeat')
                 } else {
-                    let linear = ctx.createLinearGradient(0, cy, cx * 2, cy)
-                    let start = 0
-                    const len  = this.bgColor.length - 1
-                    let p = 1 / len
+                    let linear = ctx.createLinearGradient(0, cy, cx * 2, cy), start = 0
+                    const len  = this.bgColor.length - 1, p = 1 / len
                     for (const gColor of this.bgColor) {
                         if (start === 0) {
                             linear.addColorStop(0, gColor)
@@ -216,9 +215,10 @@
                 // 用坐标来判断是 进度  还是放大
                 let { ctx } = this
                 ctx.clearRect(0, 0, this.centrality.x * 2, this.centrality.y * 2)
-                const oneAngle = Math.PI / 180 // 一度
-                const lineWidth = this.critical(this.lineWidth, 5, radius) // 最小 墙宽
-                const isprogress = process === this.percent // 是不是 进度
+                const oneAngle = Math.PI / 180, // 一度
+                lineWidth = this.critical(this.lineWidth, 5, radius), // 最小 墙宽
+                isprogress = process === this.percent // 是不是 进度
+                //-----------------
                 let isSelect = false // 是不是 选中
                 this.startAngel =  oneAngle * this.rotate
                 if(this.defaultBg) {
@@ -506,8 +506,10 @@
             let canvasDom =  document.createElement('canvas')
             const diameter = clientWidth > clientHeight ? clientHeight : clientWidth
             this.radius = diameter / 2
-            this.centrality.x = clientWidth / 2
-            this.centrality.y = clientHeight / 2
+            this.centrality = {
+                x: clientWidth / 2,
+                y:  clientHeight / 2
+            }
             canvasDom.style.width =  clientWidth + 'px'
             canvasDom.style.height = clientHeight + 'px'
             mountNode.appendChild(canvasDom)
@@ -522,7 +524,12 @@
                 img.src = this.bgImg
                 img.onload = () => { // 等到图片加载进来之后
                     this.imgCanvas = canvasDom.cloneNode(true)
-                    this.imgCanvas.getContext('2d').drawImage(img, (clientWidth - diameter) / 2 , (clientHeight - diameter) / 2, diameter, diameter)
+                    this.imgCanvas.getContext('2d').drawImage(img,
+                    (clientWidth - diameter) / 2 ,
+                    (clientHeight - diameter) / 2, 
+                    diameter ,
+                    diameter    
+                    )
                     this.animation()
                 }
             } else {
